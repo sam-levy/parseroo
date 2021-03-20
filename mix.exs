@@ -51,7 +51,8 @@ defmodule Parceroo.MixProject do
       {:money, "~> 1.4"},
       {:ex_machina, "~> 2.7.0", only: :test},
       {:excoveralls, "~> 0.10", only: :test},
-      {:credo, "~> 1.5", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
+      {:faker, "~> 0.16", only: :test}
     ]
   end
 
