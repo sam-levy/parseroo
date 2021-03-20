@@ -1,0 +1,107 @@
+defmodule Parceroo.OrdersTest do
+  use Parceroo.DataCase, async: true
+
+  alias Ecto.UUID
+  alias Parceroo.Orders.Order
+
+  describe "changeset/2" do
+    test "valid attributes" do
+      date_created = Faker.DateTime.backward(2)
+      total_amount = random_integer()
+      total_shipping = 10
+
+      attrs = %{
+        external_id: random_string_number(),
+        store_id: random_integer(),
+        date_created: date_created,
+        date_closed: date_created,
+        last_updated: date_created,
+        total_amount: total_amount,
+        total_shipping: total_shipping,
+        total_amount_with_shipping: total_amount + total_shipping,
+        paid_amount: total_amount + total_shipping,
+        expiration_date: Faker.DateTime.forward(1)
+      }
+
+      assert changeset = %Ecto.Changeset{} = Order.changeset(attrs)
+
+      assert changeset.valid?
+      assert errors_on(changeset) == %{}
+    end
+
+    test "invalid attributes" do
+      attrs = %{
+        external_id: :invalid,
+        store_id: :invalid,
+        date_created: :invalid,
+        date_closed: :invalid,
+        last_updated: :invalid,
+        total_amount: :invalid,
+        total_shipping: :invalid,
+        total_amount_with_shipping: :invalid,
+        paid_amount: :invalid,
+        expiration_date: Faker.DateTime.forward(1)
+      }
+
+      assert changeset = %Ecto.Changeset{} = Order.changeset(attrs)
+
+      refute changeset.valid?
+
+      assert errors_on(changeset) == %{
+               date_closed: ["is invalid"],
+               date_created: ["is invalid"],
+               external_id: ["is invalid"],
+               last_updated: ["is invalid"],
+               paid_amount: ["is invalid"],
+               store_id: ["is invalid"],
+               total_amount: ["is invalid"],
+               total_amount_with_shipping: ["is invalid"],
+               total_shipping: ["is invalid"]
+             }
+    end
+
+    test "missing required attributes" do
+      assert changeset = %Ecto.Changeset{} = Order.changeset(%{})
+
+      refute changeset.valid?
+
+      assert errors_on(changeset) == %{
+               date_closed: ["can't be blank"],
+               date_created: ["can't be blank"],
+               expiration_date: ["can't be blank"],
+               external_id: ["can't be blank"],
+               last_updated: ["can't be blank"],
+               paid_amount: ["can't be blank"],
+               store_id: ["can't be blank"],
+               total_amount: ["can't be blank"],
+               total_amount_with_shipping: ["can't be blank"],
+               total_shipping: ["can't be blank"]
+             }
+    end
+
+    test "when string attributes are too long" do
+      date_created = Faker.DateTime.backward(2)
+      total_amount = random_integer()
+      total_shipping = 10
+
+      attrs = %{
+        external_id: 256 |> Faker.Lorem.characters() |> to_string(),
+        store_id: random_integer(),
+        date_created: date_created,
+        date_closed: date_created,
+        last_updated: date_created,
+        total_amount: total_amount,
+        total_shipping: total_shipping,
+        total_amount_with_shipping: total_amount + total_shipping,
+        paid_amount: total_amount + total_shipping,
+        expiration_date: Faker.DateTime.forward(1)
+      }
+
+      assert changeset = %Ecto.Changeset{} = Order.changeset(attrs)
+
+      refute changeset.valid?
+
+      assert errors_on(changeset) == %{external_id: ["should be at most 255 character(s)"]}
+    end
+  end
+end
