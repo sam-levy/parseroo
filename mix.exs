@@ -42,6 +42,8 @@ defmodule Parceroo.MixProject do
     [
       {:phoenix, "~> 1.5.7"},
       {:phoenix_ecto, "~> 4.1"},
+      {:ecto_enum, "~> 1.4"},
+      {:ecto_enum_migration, "~> 0.3.1"},
       {:ecto_sql, "~> 3.4"},
       {:postgrex, ">= 0.0.0"},
       {:telemetry_metrics, "~> 0.4"},
