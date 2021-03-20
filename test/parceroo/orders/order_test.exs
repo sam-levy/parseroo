@@ -1,14 +1,13 @@
-defmodule Parceroo.OrdersTest do
+defmodule Parceroo.OrderTest do
   use Parceroo.DataCase, async: true
 
-  alias Ecto.UUID
   alias Parceroo.Orders.Order
 
   describe "changeset/2" do
     test "valid attributes" do
       date_created = Faker.DateTime.backward(2)
       total_amount = random_integer()
-      total_shipping = 10
+      total_shipping = random_integer(5..15)
 
       attrs = %{
         external_id: random_string_number(),
@@ -23,7 +22,7 @@ defmodule Parceroo.OrdersTest do
         expiration_date: Faker.DateTime.forward(1)
       }
 
-      assert changeset = %Ecto.Changeset{} = Order.changeset(attrs)
+      assert %Ecto.Changeset{} = changeset = Order.changeset(attrs)
 
       assert changeset.valid?
       assert errors_on(changeset) == %{}
@@ -43,7 +42,7 @@ defmodule Parceroo.OrdersTest do
         expiration_date: Faker.DateTime.forward(1)
       }
 
-      assert changeset = %Ecto.Changeset{} = Order.changeset(attrs)
+      assert %Ecto.Changeset{} = changeset = Order.changeset(attrs)
 
       refute changeset.valid?
 
@@ -61,7 +60,7 @@ defmodule Parceroo.OrdersTest do
     end
 
     test "missing required attributes" do
-      assert changeset = %Ecto.Changeset{} = Order.changeset(%{})
+      assert %Ecto.Changeset{} = changeset = Order.changeset(%{})
 
       refute changeset.valid?
 
@@ -97,11 +96,42 @@ defmodule Parceroo.OrdersTest do
         expiration_date: Faker.DateTime.forward(1)
       }
 
-      assert changeset = %Ecto.Changeset{} = Order.changeset(attrs)
+      assert %Ecto.Changeset{} = changeset = Order.changeset(attrs)
 
       refute changeset.valid?
 
       assert errors_on(changeset) == %{external_id: ["should be at most 255 character(s)"]}
+    end
+
+    test "when external_id already exist" do
+      external_id = random_string_number()
+      date_created = Faker.DateTime.backward(2)
+      total_amount = random_integer()
+      total_shipping = random_integer(5..15)
+
+      insert(:order, external_id: external_id)
+
+      attrs = %{
+        external_id: external_id,
+        store_id: random_integer(),
+        date_created: date_created,
+        date_closed: date_created,
+        last_updated: date_created,
+        total_amount: total_amount,
+        total_shipping: total_shipping,
+        total_amount_with_shipping: total_amount + total_shipping,
+        paid_amount: total_amount + total_shipping,
+        expiration_date: Faker.DateTime.forward(1)
+      }
+
+      assert {:error, %Ecto.Changeset{} = changeset} =
+               attrs
+               |> Order.changeset()
+               |> Repo.insert()
+
+      refute changeset.valid?
+
+      assert errors_on(changeset) == %{external_id: ["has already been taken"]}
     end
   end
 end

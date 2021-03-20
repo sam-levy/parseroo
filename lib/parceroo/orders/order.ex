@@ -2,7 +2,7 @@ defmodule Parceroo.Orders.Order do
   use Parceroo.Schema
   import Ecto.Changeset
 
-  alias Money.Ecto.Amount
+  alias Money.Ecto.Amount.Type, as: MoneyType
 
   @fields [
     :external_id,
@@ -23,10 +23,10 @@ defmodule Parceroo.Orders.Order do
     field :date_created, :utc_datetime
     field :date_closed, :utc_datetime
     field :last_updated, :utc_datetime
-    field :total_amount, Amount.Type
-    field :total_shipping, Amount.Type
-    field :total_amount_with_shipping, Amount.Type
-    field :paid_amount, Amount.Type
+    field :total_amount, MoneyType
+    field :total_shipping, MoneyType
+    field :total_amount_with_shipping, MoneyType
+    field :paid_amount, MoneyType
     field :expiration_date, :utc_datetime
 
     timestamps()
