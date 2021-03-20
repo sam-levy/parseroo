@@ -11,6 +11,11 @@ config :parceroo,
   ecto_repos: [Parceroo.Repo],
   generators: [binary_id: true]
 
+config :parceroo, Parceroo.Repo,
+  migration_primary_key: [type: :binary_id],
+  migration_foreign_key: [type: :binary_id],
+  migration_timestamps: [type: :utc_datetime_usec]
+
 # Configures the endpoint
 config :parceroo, ParcerooWeb.Endpoint,
   url: [host: "localhost"],
