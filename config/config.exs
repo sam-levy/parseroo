@@ -8,8 +8,7 @@
 use Mix.Config
 
 config :parceroo,
-  ecto_repos: [Parceroo.Repo],
-  generators: [binary_id: true]
+  ecto_repos: [Parceroo.Repo]
 
 config :parceroo, Parceroo.Repo,
   migration_primary_key: [type: :binary_id],
