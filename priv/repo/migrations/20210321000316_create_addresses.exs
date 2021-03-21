@@ -3,7 +3,7 @@ defmodule Parceroo.Repo.Migrations.CreateAddresses do
 
   def change do
     create table(:order_addresses) do
-      add :external_id, :integer, null: false
+      add :external_id, :string, null: false
       add :address_line, :string, null: false
       add :street_name, :string, null: false
       add :street_number, :string, null: false

@@ -4,7 +4,7 @@ defmodule Parceroo.Repo.Migrations.CreateOrderShipments do
 
   def change do
     create table(:order_shipments) do
-      add :external_id, :integer, null: false
+      add :external_id, :string, null: false
       add :date_created, :utc_datetime, null: false
       add :shipment_type, :string, null: false
 

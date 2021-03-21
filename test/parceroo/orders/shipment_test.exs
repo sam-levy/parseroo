@@ -11,7 +11,7 @@ defmodule Parceroo.Orders.ShipmentTest do
       address = insert(:address)
 
       attrs = %{
-        external_id: random_integer(),
+        external_id: random_string_number(),
         date_created: Faker.DateTime.backward(2),
         shipment_type: "shipment",
         order_id: order.id,
@@ -71,6 +71,7 @@ defmodule Parceroo.Orders.ShipmentTest do
 
       attrs =
         params_for(:shipment, %{
+          external_id: 256 |> Faker.Lorem.characters() |> to_string(),
           shipment_type: 256 |> Faker.Lorem.characters() |> to_string(),
           order_id: order.id,
           receiver_address_id: address.id
@@ -81,7 +82,8 @@ defmodule Parceroo.Orders.ShipmentTest do
       refute changeset.valid?
 
       assert errors_on(changeset) == %{
-               shipment_type: ["should be at most 255 character(s)"]
+               shipment_type: ["should be at most 255 character(s)"],
+               external_id: ["should be at most 255 character(s)"]
              }
     end
 

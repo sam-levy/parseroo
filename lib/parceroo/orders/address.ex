@@ -21,7 +21,7 @@ defmodule Parceroo.Orders.Address do
   ]
 
   schema "order_addresses" do
-    field :external_id, :integer
+    field :external_id, :string
     field :address_line, :string
     field :street_name, :string
     field :street_number, :string
@@ -42,6 +42,7 @@ defmodule Parceroo.Orders.Address do
     target
     |> cast(attrs, @fields)
     |> validate_required(@fields)
+    |> validate_length(:external_id, max: 255)
     |> validate_length(:address_line, max: 255)
     |> validate_length(:street_name, max: 255)
     |> validate_length(:street_number, max: 255)

@@ -10,7 +10,7 @@ defmodule Parceroo.AddressTest do
       street_number = random_integer() |> to_string()
 
       attrs = %{
-        external_id: random_integer(),
+        external_id: random_string_number(),
         address_line: "#{street_name} #{street_number}",
         street_name: street_name,
         street_number: street_number,
@@ -97,8 +97,6 @@ defmodule Parceroo.AddressTest do
     end
 
     test "when string attributes are too long" do
-      price = random_integer(50..300)
-
       attrs =
         params_for(:address, %{
           address_line: 256 |> Faker.Lorem.characters() |> to_string(),
@@ -111,7 +109,8 @@ defmodule Parceroo.AddressTest do
           neighborhood: 256 |> Faker.Lorem.characters() |> to_string(),
           latitude: 256 |> Faker.Lorem.characters() |> to_string(),
           longitude: 256 |> Faker.Lorem.characters() |> to_string(),
-          receiver_phone: 256 |> Faker.Lorem.characters() |> to_string()
+          receiver_phone: 256 |> Faker.Lorem.characters() |> to_string(),
+          external_id: 256 |> Faker.Lorem.characters() |> to_string()
         })
 
       assert %Ecto.Changeset{} = changeset = Address.changeset(attrs)
@@ -129,7 +128,8 @@ defmodule Parceroo.AddressTest do
                receiver_phone: ["should be at most 255 character(s)"],
                street_name: ["should be at most 255 character(s)"],
                street_number: ["should be at most 255 character(s)"],
-               zip_code: ["should be at most 255 character(s)"]
+               zip_code: ["should be at most 255 character(s)"],
+               external_id: ["should be at most 255 character(s)"]
              }
     end
 

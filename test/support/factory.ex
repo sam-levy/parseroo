@@ -77,7 +77,7 @@ defmodule Parceroo.Factory do
     street_number = random_integer() |> to_string()
 
     %Address{
-      external_id: random_integer(),
+      external_id: random_string_number(),
       address_line: "#{street_name} #{street_number}",
       street_name: street_name,
       street_number: street_number,
@@ -95,7 +95,7 @@ defmodule Parceroo.Factory do
 
   def shipment_factory do
     %Shipment{
-      external_id: random_integer(),
+      external_id: random_string_number(),
       date_created: Faker.DateTime.backward(2),
       shipment_type: "shipment",
       order: build(:order),

@@ -2,13 +2,22 @@ defmodule Parceroo.Orders.Payment do
   use Parceroo.Schema
 
   import Ecto.Changeset
-  import EctoEnum
 
   alias Money.Ecto.Amount.Type, as: MoneyType
   alias Parceroo.Orders.Order
 
-  defenum(PaymentType, :order_payment_type, [:credit_card, :debit_card, :voucher, :boleto])
-  defenum(PaymentStatusType, :order_payment_status_type, [:pending, :paid, :rejected])
+  defenum(PaymentType, :order_payment_type, [
+    :credit_card,
+    :debit_card,
+    :voucher,
+    :boleto
+  ])
+
+  defenum(PaymentStatusType, :order_payment_status_type, [
+    :pending,
+    :paid,
+    :rejected
+  ])
 
   @fields [
     :external_id,

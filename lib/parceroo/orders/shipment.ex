@@ -7,7 +7,7 @@ defmodule Parceroo.Orders.Shipment do
   @fields [:external_id, :date_created, :shipment_type, :order_id, :receiver_address_id]
 
   schema "order_shipments" do
-    field :external_id, :integer
+    field :external_id, :string
     field :date_created, :utc_datetime
     field :shipment_type, :string
 
@@ -21,6 +21,7 @@ defmodule Parceroo.Orders.Shipment do
     target
     |> cast(attrs, @fields)
     |> validate_required(@fields)
+    |> validate_length(:external_id, max: 255)
     |> validate_length(:shipment_type, max: 255)
     |> unique_constraint(:external_id)
     |> unique_constraint(:order_id)
