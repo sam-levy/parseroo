@@ -19,7 +19,8 @@ defmodule Parceroo.OrderTest do
         total_shipping: total_shipping,
         total_amount_with_shipping: total_amount + total_shipping,
         paid_amount: total_amount + total_shipping,
-        expiration_date: Faker.DateTime.forward(1)
+        expiration_date: Faker.DateTime.forward(1),
+        status: :paid
       }
 
       assert %Ecto.Changeset{} = changeset = Order.changeset(attrs)
@@ -39,7 +40,8 @@ defmodule Parceroo.OrderTest do
         total_shipping: :invalid,
         total_amount_with_shipping: :invalid,
         paid_amount: :invalid,
-        expiration_date: Faker.DateTime.forward(1)
+        expiration_date: :invalid,
+        status: :invalid
       }
 
       assert %Ecto.Changeset{} = changeset = Order.changeset(attrs)
@@ -55,7 +57,9 @@ defmodule Parceroo.OrderTest do
                store_id: ["is invalid"],
                total_amount: ["is invalid"],
                total_amount_with_shipping: ["is invalid"],
-               total_shipping: ["is invalid"]
+               total_shipping: ["is invalid"],
+               expiration_date: ["is invalid"],
+               status: ["is invalid"]
              }
     end
 
@@ -74,27 +78,13 @@ defmodule Parceroo.OrderTest do
                store_id: ["can't be blank"],
                total_amount: ["can't be blank"],
                total_amount_with_shipping: ["can't be blank"],
-               total_shipping: ["can't be blank"]
+               total_shipping: ["can't be blank"],
+               status: ["can't be blank"]
              }
     end
 
     test "when string attributes are too long" do
-      date_created = Faker.DateTime.backward(2)
-      total_amount = random_integer()
-      total_shipping = 10
-
-      attrs = %{
-        external_id: 256 |> Faker.Lorem.characters() |> to_string(),
-        store_id: random_integer(),
-        date_created: date_created,
-        date_closed: date_created,
-        last_updated: date_created,
-        total_amount: total_amount,
-        total_shipping: total_shipping,
-        total_amount_with_shipping: total_amount + total_shipping,
-        paid_amount: total_amount + total_shipping,
-        expiration_date: Faker.DateTime.forward(1)
-      }
+      attrs = params_for(:order, %{external_id: 256 |> Faker.Lorem.characters() |> to_string()})
 
       assert %Ecto.Changeset{} = changeset = Order.changeset(attrs)
 
@@ -105,24 +95,10 @@ defmodule Parceroo.OrderTest do
 
     test "when external_id already exist" do
       external_id = random_string_number()
-      date_created = Faker.DateTime.backward(2)
-      total_amount = random_integer()
-      total_shipping = random_integer(5..15)
 
       insert(:order, external_id: external_id)
 
-      attrs = %{
-        external_id: external_id,
-        store_id: random_integer(),
-        date_created: date_created,
-        date_closed: date_created,
-        last_updated: date_created,
-        total_amount: total_amount,
-        total_shipping: total_shipping,
-        total_amount_with_shipping: total_amount + total_shipping,
-        paid_amount: total_amount + total_shipping,
-        expiration_date: Faker.DateTime.forward(1)
-      }
+      attrs = params_for(:order, %{external_id: external_id})
 
       assert {:error, %Ecto.Changeset{} = changeset} =
                attrs

@@ -4,6 +4,8 @@ defmodule Parceroo.Orders.Order do
 
   alias Money.Ecto.Amount.Type, as: MoneyType
 
+  defenum(OrderStatusType, :order_status_type, [:paid, :in_transit, :delivered])
+
   @fields [
     :external_id,
     :store_id,
@@ -14,7 +16,8 @@ defmodule Parceroo.Orders.Order do
     :total_shipping,
     :total_amount_with_shipping,
     :paid_amount,
-    :expiration_date
+    :expiration_date,
+    :status
   ]
 
   schema "orders" do
@@ -27,6 +30,7 @@ defmodule Parceroo.Orders.Order do
     field :total_shipping, MoneyType
     field :total_amount_with_shipping, MoneyType
     field :paid_amount, MoneyType
+    field :status, OrderStatusType
     field :expiration_date, :utc_datetime
 
     timestamps()

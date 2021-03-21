@@ -1,7 +1,10 @@
 defmodule Parceroo.Repo.Migrations.CreateOrders do
   use Ecto.Migration
+  import EctoEnumMigration
 
   def change do
+    create_type(:order_status_type, [:paid, :in_transit, :delivered])
+
     create table(:orders) do
       add :external_id, :string, null: false
       add :store_id, :integer, null: false
@@ -13,6 +16,8 @@ defmodule Parceroo.Repo.Migrations.CreateOrders do
       add :total_amount_with_shipping, :integer, null: false
       add :paid_amount, :integer, null: false
       add :expiration_date, :utc_datetime, null: false
+
+      add :status, :order_status_type, null: false
 
       timestamps()
     end

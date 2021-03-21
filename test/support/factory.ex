@@ -18,7 +18,8 @@ defmodule Parceroo.Factory do
       total_shipping: total_shipping,
       total_amount_with_shipping: total_amount + total_shipping,
       paid_amount: total_amount + total_shipping,
-      expiration_date: Faker.DateTime.forward(1)
+      expiration_date: Faker.DateTime.forward(1),
+      status: :paid
     }
 
     merge_attributes(order, attrs)
