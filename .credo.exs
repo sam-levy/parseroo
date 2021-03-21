@@ -130,12 +130,7 @@
         {Credo.Check.Refactor.VariableRebinding, false},
         {Credo.Check.Warning.LeakyEnvironment, []},
         {Credo.Check.Warning.MapGetUnsafePass, []},
-        {Credo.Check.Warning.UnsafeToAtom, []},
-
-        #
-        # Custom
-        #
-        {CredoNaming.Check.Consistency.ModuleFilename, excluded_paths: [], acronyms: []}
+        {Credo.Check.Warning.UnsafeToAtom, []}
       ]
     }
   ]
