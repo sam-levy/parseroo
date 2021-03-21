@@ -1,7 +1,7 @@
 defmodule Parceroo.Factory do
   use ExMachina.Ecto, repo: Parceroo.Repo
 
-  alias Parceroo.Orders.{Address, Item, Order, Payment}
+  alias Parceroo.Orders.{Address, Item, Order, Payment, Shipment}
 
   def order_factory(attrs) do
     total_amount = Map.get(attrs, :total_amount, random_integer())
@@ -90,6 +90,16 @@ defmodule Parceroo.Factory do
       longitude: Faker.Address.longitude() |> Float.to_string(),
       receiver_phone: Faker.Phone.EnUs.phone(),
       state: Faker.Address.PtBr.state_abbr()
+    }
+  end
+
+  def shipment_factory do
+    %Shipment{
+      external_id: random_integer(),
+      date_created: Faker.DateTime.backward(2),
+      shipment_type: "shipment",
+      order: build(:order),
+      receiver_address: build(:address)
     }
   end
 
