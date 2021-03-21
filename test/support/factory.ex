@@ -1,7 +1,7 @@
 defmodule Parceroo.Factory do
   use ExMachina.Ecto, repo: Parceroo.Repo
 
-  alias Parceroo.Orders.{Item, Order, Payment}
+  alias Parceroo.Orders.{Address, Item, Order, Payment}
 
   def order_factory(attrs) do
     total_amount = Map.get(attrs, :total_amount, random_integer())
@@ -70,6 +70,27 @@ defmodule Parceroo.Factory do
     }
 
     merge_attributes(payment, attrs)
+  end
+
+  def address_factory do
+    street_name = Faker.Address.PtBr.street_name()
+    street_number = random_integer() |> to_string()
+
+    %Address{
+      external_id: random_integer(),
+      address_line: "#{street_name} #{street_number}",
+      street_name: street_name,
+      street_number: street_number,
+      complement: Faker.Lorem.sentence(3),
+      zip_code: Faker.Address.PtBr.zip_code(),
+      city: Faker.Address.PtBr.city(),
+      country_code: "BR",
+      neighborhood: Faker.Address.PtBr.neighborhood(),
+      latitude: Faker.Address.latitude() |> Float.to_string(),
+      longitude: Faker.Address.longitude() |> Float.to_string(),
+      receiver_phone: Faker.Phone.EnUs.phone(),
+      state: Faker.Address.PtBr.state_abbr()
+    }
   end
 
   def random_integer(range \\ 10..9999), do: Enum.random(range)
