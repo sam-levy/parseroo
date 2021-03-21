@@ -3,6 +3,7 @@ defmodule Parceroo.Orders.Order do
   import Ecto.Changeset
 
   alias Money.Ecto.Amount.Type, as: MoneyType
+  alias Parceroo.Orders.Buyer
 
   defenum(OrderStatusType, :order_status_type, [:paid, :in_transit, :delivered])
 
@@ -17,7 +18,8 @@ defmodule Parceroo.Orders.Order do
     :total_amount_with_shipping,
     :paid_amount,
     :expiration_date,
-    :status
+    :status,
+    :buyer_id
   ]
 
   schema "orders" do
@@ -33,6 +35,8 @@ defmodule Parceroo.Orders.Order do
     field :status, OrderStatusType
     field :expiration_date, :utc_datetime
 
+    belongs_to :buyer, Buyer
+
     timestamps()
   end
 
@@ -42,5 +46,6 @@ defmodule Parceroo.Orders.Order do
     |> validate_required(@fields)
     |> validate_length(:external_id, max: 255)
     |> unique_constraint(:external_id)
+    |> assoc_constraint(:buyer)
   end
 end

@@ -19,8 +19,12 @@ defmodule Parceroo.Repo.Migrations.CreateOrders do
 
       add :status, :order_status_type, null: false
 
+      add :buyer_id, references(:order_buyers), null: false
+
       timestamps()
     end
+
+    create index(:orders, [:buyer_id])
 
     create unique_index(:orders, [:external_id])
   end

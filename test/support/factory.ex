@@ -3,6 +3,18 @@ defmodule Parceroo.Factory do
 
   alias Parceroo.Orders.{Address, Buyer, Item, Order, Payment, Shipment}
 
+  def buyer_factory do
+    %Buyer{
+      external_id: random_string_number(),
+      email: Faker.Internet.email(),
+      phone_number: Faker.Phone.EnUs.phone(),
+      first_name: Faker.Person.first_name(),
+      last_name: Faker.Person.last_name(),
+      doc_type: "CPF",
+      doc_number: "09487965477"
+    }
+  end
+
   def order_factory(attrs) do
     total_amount = Map.get(attrs, :total_amount, random_integer())
     total_shipping = Map.get(attrs, :total_shipping, random_integer(5..15))
@@ -19,7 +31,8 @@ defmodule Parceroo.Factory do
       total_amount_with_shipping: total_amount + total_shipping,
       paid_amount: total_amount + total_shipping,
       expiration_date: Faker.DateTime.forward(1),
-      status: :paid
+      status: :paid,
+      buyer: build(:buyer)
     }
 
     merge_attributes(order, attrs)
@@ -101,18 +114,6 @@ defmodule Parceroo.Factory do
       shipment_type: "shipment",
       order: build(:order),
       receiver_address: build(:address)
-    }
-  end
-
-  def buyer_factory do
-    %Buyer{
-      external_id: random_string_number(),
-      email: Faker.Internet.email(),
-      phone_number: Faker.Phone.EnUs.phone(),
-      first_name: Faker.Person.first_name(),
-      last_name: Faker.Person.last_name(),
-      doc_type: "CPF",
-      doc_number: "09487965477"
     }
   end
 

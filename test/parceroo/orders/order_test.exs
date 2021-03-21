@@ -1,13 +1,16 @@
 defmodule Parceroo.Orders.OrderTest do
   use Parceroo.DataCase, async: true
 
+  alias Ecto.UUID
   alias Parceroo.Orders.Order
+  alias Parceroo.Repo
 
   describe "changeset/2" do
     test "valid attributes" do
       date_created = Faker.DateTime.backward(2)
       total_amount = random_integer()
       total_shipping = random_integer(5..15)
+      buyer = insert(:buyer)
 
       attrs = %{
         external_id: random_string_number(),
@@ -20,13 +23,19 @@ defmodule Parceroo.Orders.OrderTest do
         total_amount_with_shipping: total_amount + total_shipping,
         paid_amount: total_amount + total_shipping,
         expiration_date: Faker.DateTime.forward(1),
-        status: :paid
+        status: :paid,
+        buyer_id: buyer.id
       }
 
       assert %Ecto.Changeset{} = changeset = Order.changeset(attrs)
 
       assert changeset.valid?
       assert errors_on(changeset) == %{}
+
+      assert {:ok, %Order{}} =
+               attrs
+               |> Order.changeset()
+               |> Repo.insert()
     end
 
     test "invalid attributes" do
@@ -41,7 +50,8 @@ defmodule Parceroo.Orders.OrderTest do
         total_amount_with_shipping: :invalid,
         paid_amount: :invalid,
         expiration_date: :invalid,
-        status: :invalid
+        status: :invalid,
+        buyer_id: :invalid
       }
 
       assert %Ecto.Changeset{} = changeset = Order.changeset(attrs)
@@ -59,7 +69,8 @@ defmodule Parceroo.Orders.OrderTest do
                total_amount_with_shipping: ["is invalid"],
                total_shipping: ["is invalid"],
                expiration_date: ["is invalid"],
-               status: ["is invalid"]
+               status: ["is invalid"],
+               buyer_id: ["is invalid"]
              }
     end
 
@@ -79,12 +90,19 @@ defmodule Parceroo.Orders.OrderTest do
                total_amount: ["can't be blank"],
                total_amount_with_shipping: ["can't be blank"],
                total_shipping: ["can't be blank"],
-               status: ["can't be blank"]
+               status: ["can't be blank"],
+               buyer_id: ["can't be blank"]
              }
     end
 
     test "when string attributes are too long" do
-      attrs = params_for(:order, %{external_id: 256 |> Faker.Lorem.characters() |> to_string()})
+      buyer = insert(:buyer)
+
+      attrs =
+        params_for(:order, %{
+          external_id: 256 |> Faker.Lorem.characters() |> to_string(),
+          buyer_id: buyer.id
+        })
 
       assert %Ecto.Changeset{} = changeset = Order.changeset(attrs)
 
@@ -93,12 +111,26 @@ defmodule Parceroo.Orders.OrderTest do
       assert errors_on(changeset) == %{external_id: ["should be at most 255 character(s)"]}
     end
 
+    test "when buyer does not exist" do
+      attrs = params_for(:order, %{buyer_id: UUID.generate()})
+
+      assert {:error, %Ecto.Changeset{} = changeset} =
+               attrs
+               |> Order.changeset()
+               |> Repo.insert()
+
+      refute changeset.valid?
+
+      assert errors_on(changeset) == %{buyer: ["does not exist"]}
+    end
+
     test "when external_id already exist" do
+      buyer = insert(:buyer)
       external_id = random_string_number()
 
       insert(:order, external_id: external_id)
 
-      attrs = params_for(:order, %{external_id: external_id})
+      attrs = params_for(:order, %{external_id: external_id, buyer_id: buyer.id})
 
       assert {:error, %Ecto.Changeset{} = changeset} =
                attrs
