@@ -64,16 +64,14 @@ defmodule Parceroo.Orders.ItemTest do
     end
 
     test "when string attributes are too long" do
-      price = random_integer(50..300)
+      order = insert(:order)
 
-      attrs = %{
-        external_id: 256 |> Faker.Lorem.characters() |> to_string(),
-        title: 256 |> Faker.Lorem.characters() |> to_string(),
-        quantity: random_integer(1..3),
-        unit_price: price,
-        full_unit_price: price,
-        order_id: UUID.generate()
-      }
+      attrs =
+        params_for(:item, %{
+          external_id: 256 |> Faker.Lorem.characters() |> to_string(),
+          title: 256 |> Faker.Lorem.characters() |> to_string(),
+          order_id: order.id
+        })
 
       assert %Ecto.Changeset{} = changeset = Item.changeset(attrs)
 
@@ -86,16 +84,9 @@ defmodule Parceroo.Orders.ItemTest do
     end
 
     test "when quantity is zero" do
-      price = random_integer(50..300)
+      order = insert(:order)
 
-      attrs = %{
-        external_id: random_string_number(),
-        title: Faker.Pokemon.name(),
-        quantity: 0,
-        unit_price: price,
-        full_unit_price: price,
-        order_id: UUID.generate()
-      }
+      attrs = params_for(:item, %{quantity: 0, order_id: order.id})
 
       assert %Ecto.Changeset{} = changeset = Item.changeset(attrs)
 
@@ -105,16 +96,7 @@ defmodule Parceroo.Orders.ItemTest do
     end
 
     test "when order does not exist" do
-      price = random_integer(50..300)
-
-      attrs = %{
-        external_id: random_string_number(),
-        title: Faker.Pokemon.name(),
-        quantity: random_integer(1..3),
-        unit_price: price,
-        full_unit_price: price,
-        order_id: UUID.generate()
-      }
+      attrs = params_for(:item, %{order_id: UUID.generate()})
 
       assert {:error, %Ecto.Changeset{} = changeset} =
                attrs
@@ -129,18 +111,10 @@ defmodule Parceroo.Orders.ItemTest do
     test "when external_id already exist" do
       order = insert(:order)
       external_id = random_string_number()
-      price = random_integer(50..300)
 
       insert(:item, external_id: external_id)
 
-      attrs = %{
-        external_id: external_id,
-        title: Faker.Pokemon.name(),
-        quantity: random_integer(1..3),
-        unit_price: price,
-        full_unit_price: price,
-        order_id: order.id
-      }
+      attrs = params_for(:item, %{external_id: external_id, order_id: order.id})
 
       assert {:error, %Ecto.Changeset{} = changeset} =
                attrs
