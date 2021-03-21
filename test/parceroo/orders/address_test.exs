@@ -1,4 +1,4 @@
-defmodule Parceroo.AddressTest do
+defmodule Parceroo.Orders.AddressTest do
   use Parceroo.DataCase, async: true
 
   alias Parceroo.Orders.Address

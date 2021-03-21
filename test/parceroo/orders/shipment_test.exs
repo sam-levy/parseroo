@@ -1,4 +1,4 @@
-defmodule Parceroo.Orders.ShipmentTest do
+defmodule Parceroo.Orders.Orders.ShipmentTest do
   use Parceroo.DataCase, async: true
 
   alias Ecto.UUID
