@@ -5,6 +5,12 @@ defmodule Parseroo.Orders.Persist do
   alias Parseroo.Parsers.Params.OrderParams
   alias Parseroo.Repo
 
+  @on_conflict [
+    on_conflict: {:replace_all_except, [:id, :inserted_at]},
+    conflict_target: :external_id,
+    returning: true
+  ]
+
   def call(%OrderParams{
         buyer: buyer,
         address: address,
@@ -14,12 +20,12 @@ defmodule Parseroo.Orders.Persist do
         payments: payments
       }) do
     Multi.new()
-    |> Multi.insert(:buyer, buyer_changeset(buyer))
-    |> Multi.insert(:address, address_changeset(address))
-    |> Multi.insert(:order, &order_changeset(&1, order))
-    |> Multi.insert(:shipment, &shipment_changeset(&1, shipment))
-    |> Multi.insert_all(:items, Item, &build_params(&1, items))
-    |> Multi.insert_all(:payments, Payment, &build_params(&1, payments))
+    |> Multi.insert(:buyer, buyer_changeset(buyer), @on_conflict)
+    |> Multi.insert(:address, address_changeset(address), @on_conflict)
+    |> Multi.insert(:order, &order_changeset(&1, order), @on_conflict)
+    |> Multi.insert(:shipment, &shipment_changeset(&1, shipment), @on_conflict)
+    |> Multi.insert_all(:items, Item, &build_params(&1, items), @on_conflict)
+    |> Multi.insert_all(:payments, Payment, &build_params(&1, payments), @on_conflict)
     |> Repo.transaction()
     |> as_result()
   end

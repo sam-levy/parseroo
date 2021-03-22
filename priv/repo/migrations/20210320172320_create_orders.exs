@@ -3,7 +3,7 @@ defmodule Parseroo.Repo.Migrations.CreateOrders do
   import EctoEnumMigration
 
   def change do
-    create_type(:order_status_type, [:paid, :in_transit, :delivered])
+    create_type(:order_status_type, [:payment_pending, :paid, :in_transit, :delivered])
 
     create table(:orders) do
       add :external_id, :string, null: false

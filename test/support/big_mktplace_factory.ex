@@ -80,7 +80,9 @@ defmodule Parseroo.BigMktPlaceFactory do
     }
   end
 
-  def params do
+  def params(opts \\ []) do
+    order_status = Keyword.get(opts, :order_status, "paid")
+
     %OrderParams{
       address: %Address{
         address_line: "Rua Fake de Testes 3454",
@@ -125,7 +127,7 @@ defmodule Parseroo.BigMktPlaceFactory do
         external_id: "9987071",
         last_updated: ~U[2019-06-25 17:26:49Z],
         paid_amount: 5504,
-        status: "paid",
+        status: order_status,
         store_id: 282,
         total_amount: 4990,
         total_amount_with_shipping: 5504,

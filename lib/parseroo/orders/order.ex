@@ -5,7 +5,7 @@ defmodule Parseroo.Orders.Order do
   alias Money.Ecto.Amount.Type, as: MoneyType
   alias Parseroo.Orders.Buyer
 
-  defenum(OrderStatusType, :order_status_type, [:paid, :in_transit, :delivered])
+  defenum(OrderStatusType, :order_status_type, [:payment_pending, :paid, :in_transit, :delivered])
 
   @fields [
     :external_id,
