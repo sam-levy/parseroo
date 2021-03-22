@@ -1,10 +1,10 @@
 defmodule Parseroo.RecruitmentApp.LocalAdapter do
   @behaviour Parseroo.RecruitmentApp.Adapter
 
-  alias Parseroo.RecruitmentApp.OrderData
+  alias Parseroo.Orders.Order
 
   @impl true
-  def post_order(%OrderData{}) do
+  def post_order(%Order{}) do
     {:ok,
      %{
        "city" => "Serra Janaína",

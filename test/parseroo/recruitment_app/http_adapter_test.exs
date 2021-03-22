@@ -3,11 +3,13 @@ defmodule Parseroo.RecruitmentApp.HTTPAdapterTest do
 
   import Tesla.Mock
 
-  alias Parseroo.RecruitmentApp.{HTTPAdapter, LocalAdapter, OrderData}
+  alias Parseroo.Orders.Order
+  alias Parseroo.RecruitmentApp.{HTTPAdapter, LocalAdapter}
 
+  # TODO:
   describe "post_order/1" do
     # test "posts an order" do
-    #   {:ok, body} = LocalAdapter.post_order(%OrderData{})
+    #   {:ok, body} = LocalAdapter.post_order(%Order{})
 
     #   mock(fn
     #     %{method: :post, url: url} ->
@@ -16,7 +18,7 @@ defmodule Parseroo.RecruitmentApp.HTTPAdapterTest do
     #       %Tesla.Env{status: 200, body: body}
     #   end)
 
-    #   assert HTTPAdapter.post_order(%OrderData{}) == {:ok, body}
+    #   assert HTTPAdapter.post_order(%Order{}) == {:ok, body}
     # end
   end
 end

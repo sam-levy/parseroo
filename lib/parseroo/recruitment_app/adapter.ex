@@ -1,5 +1,5 @@
 defmodule Parseroo.RecruitmentApp.Adapter do
-  alias Parseroo.RecruitmentApp.OrderData
+  alias Parseroo.Orders.Order
 
-  @callback post_order(opts :: OrderData.t()) :: {:ok, map()} | {:error, any()}
+  @callback post_order(order :: Order.t()) :: {:ok, map()} | {:error, any()}
 end

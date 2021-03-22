@@ -1,8 +1,9 @@
 defmodule Parseroo.RecruitmentApp do
   @behaviour Parseroo.RecruitmentApp.Adapter
 
-  alias Parseroo.RecruitmentApp.{HTTPAdapter, OrderData}
+  alias Parseroo.Orders.Order
+  alias Parseroo.RecruitmentApp.HTTPAdapter
 
   @impl true
-  def post_order(%OrderData{} = order_data), do: HTTPAdapter.post_order(order_data)
+  def post_order(%Order{} = order), do: HTTPAdapter.post_order(order)
 end

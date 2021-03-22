@@ -3,11 +3,17 @@ defmodule Parseroo.RecruitmentApp.HTTPAdapter do
 
   alias Tesla.Env
   alias Parseroo.RecruitmentApp.OrderData
+  alias Parseroo.Orders.Order
 
   @impl true
-  def post_order(%OrderData{} = order_data) do
+  def post_order(%Order{} = order) do
+    order_params =
+      order
+      |> OrderData.build()
+      |> OrderData.to_params()
+
     client()
-    |> Tesla.post("/", OrderData.to_params(order_data))
+    |> Tesla.post("/", order_params)
     |> handle_response()
   end
 

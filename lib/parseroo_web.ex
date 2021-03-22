@@ -23,6 +23,8 @@ defmodule ParserooWeb do
 
       import Plug.Conn
       alias ParserooWeb.Router.Helpers, as: Routes
+
+      action_fallback ParserooWeb.Api.FallbackController
     end
   end
 
