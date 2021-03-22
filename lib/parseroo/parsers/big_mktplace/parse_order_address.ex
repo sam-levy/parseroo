@@ -4,7 +4,7 @@ defmodule Parseroo.Parsers.BigMktplace.ParseOrderAddress do
 
   def call(%{"shipping" => %{"receiver_address" => address}}) do
     %Address{
-      external_id: to_string(address["id"]),
+      external_id: address["id"] |> to_string(),
       address_line: address["address_line"],
       street_name: address["street_name"],
       street_number: address["street_number"],

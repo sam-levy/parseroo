@@ -11,10 +11,11 @@ defmodule Parseroo.Parsers.BigMktplace.ParseOrderItemsTest do
       assert ParseOrderItems.call(payload) == [
                %Item{
                  external_id: "IT4801901403",
-                 full_unit_price: 49.9,
+                 full_unit_price: 4990,
                  quantity: 1,
                  title: "Produto de Testes",
-                 unit_price: 49.9
+                 unit_price: 4990,
+                 order_id: nil
                }
              ]
     end

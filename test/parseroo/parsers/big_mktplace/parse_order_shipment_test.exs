@@ -9,7 +9,7 @@ defmodule Parseroo.Parsers.BigMktplace.ParseOrderShipmentTest do
       payload = BigMktPlaceFactory.payload()
 
       assert ParseOrderShipment.call(payload) == %Shipment{
-               date_created: "2019-06-24T16:45:33.000-04:00",
+               date_created: ~U[2019-06-24 20:45:33Z],
                external_id: "43444211797",
                shipment_type: "shipping",
                receiver_address_id: nil,

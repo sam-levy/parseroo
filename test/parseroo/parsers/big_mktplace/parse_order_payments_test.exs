@@ -10,19 +10,19 @@ defmodule Parseroo.Parsers.BigMktplace.ParseOrderPaymentsTest do
 
       assert ParseOrderPayments.call(payload) == [
                %Payment{
-                 date_approved: "2019-06-24T16:45:35.000-04:00",
-                 date_created: "2019-06-24T16:45:33.000-04:00",
+                 date_approved: ~U[2019-06-24 20:45:35Z],
+                 date_created: ~U[2019-06-24 20:45:33Z],
                  external_id: "12312313",
                  order_external_id: "9987071",
                  payer_external_id: "414138",
-                 installment_amount: 55.04,
+                 installment_amount: 5504,
                  installments: 1,
                  payment_type: "credit_card",
-                 shipping_cost: 5.14,
+                 shipping_cost: 514,
                  status: "paid",
                  taxes_amount: 0,
-                 total_paid_amount: 55.04,
-                 transaction_amount: 49.9,
+                 total_paid_amount: 5504,
+                 transaction_amount: 4990,
                  order_id: nil
                }
              ]
