@@ -1,10 +1,10 @@
 use Mix.Config
 
 # Configure your database
-config :parceroo, Parceroo.Repo,
+config :parseroo, Parseroo.Repo,
   username: "postgres",
   password: "postgres",
-  database: "parceroo_dev",
+  database: "parseroo_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
@@ -15,7 +15,7 @@ config :parceroo, Parceroo.Repo,
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :parceroo, ParcerooWeb.Endpoint,
+config :parseroo, ParserooWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,

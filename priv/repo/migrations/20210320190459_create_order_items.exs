@@ -1,4 +1,4 @@
-defmodule Parceroo.Repo.Migrations.CreateOrderItems do
+defmodule Parseroo.Repo.Migrations.CreateOrderItems do
   use Ecto.Migration
 
   def change do

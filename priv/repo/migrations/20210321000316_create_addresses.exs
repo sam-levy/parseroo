@@ -1,4 +1,4 @@
-defmodule Parceroo.Repo.Migrations.CreateAddresses do
+defmodule Parseroo.Repo.Migrations.CreateAddresses do
   use Ecto.Migration
 
   def change do

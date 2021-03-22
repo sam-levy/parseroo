@@ -1,13 +1,13 @@
 {
   "skip_files": [
     "test/support",
-    "lib/parceroo/application.ex",
-    "lib/parceroo_web.ex",
-    "lib/parceroo_web/router.ex",
-    "lib/parceroo_web/endpoint.ex",
-    "lib/parceroo_web/telemetry.ex",
-    "lib/parceroo_web/channels/user_socket.ex",
-    "lib/parceroo_web/views/error_helpers.ex"
+    "lib/parseroo/application.ex",
+    "lib/parseroo_web.ex",
+    "lib/parseroo_web/router.ex",
+    "lib/parseroo_web/endpoint.ex",
+    "lib/parseroo_web/telemetry.ex",
+    "lib/parseroo_web/channels/user_socket.ex",
+    "lib/parseroo_web/views/error_helpers.ex"
   ],
   "coverage_options": {
     "minimum_coverage": 100,

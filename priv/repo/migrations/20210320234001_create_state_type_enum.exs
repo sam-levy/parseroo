@@ -1,4 +1,4 @@
-defmodule Parceroo.Repo.Migrations.CreateStateTypeEnum do
+defmodule Parseroo.Repo.Migrations.CreateStateTypeEnum do
   use Ecto.Migration
 
   import EctoEnumMigration

@@ -1,4 +1,4 @@
-# Parceroo
+# Parseroo
 
 To start your Phoenix server:
 

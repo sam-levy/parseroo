@@ -1,4 +1,4 @@
-defmodule ParcerooWeb.ConnCase do
+defmodule ParserooWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -11,7 +11,7 @@ defmodule ParcerooWeb.ConnCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use ParcerooWeb.ConnCase, async: true`, although
+  by setting `use ParserooWeb.ConnCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -22,20 +22,20 @@ defmodule ParcerooWeb.ConnCase do
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
-      import ParcerooWeb.ConnCase
+      import ParserooWeb.ConnCase
 
-      alias ParcerooWeb.Router.Helpers, as: Routes
+      alias ParserooWeb.Router.Helpers, as: Routes
 
       # The default endpoint for testing
-      @endpoint ParcerooWeb.Endpoint
+      @endpoint ParserooWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Parceroo.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Parseroo.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Parceroo.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Parseroo.Repo, {:shared, self()})
     end
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}

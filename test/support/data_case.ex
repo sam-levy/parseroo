@@ -1,4 +1,4 @@
-defmodule Parceroo.DataCase do
+defmodule Parseroo.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -10,7 +10,7 @@ defmodule Parceroo.DataCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use Parceroo.DataCase, async: true`, although
+  by setting `use Parseroo.DataCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -18,21 +18,21 @@ defmodule Parceroo.DataCase do
 
   using do
     quote do
-      alias Parceroo.Repo
+      alias Parseroo.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import Parceroo.DataCase
-      import Parceroo.Factory
+      import Parseroo.DataCase
+      import Parseroo.Factory
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Parceroo.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Parseroo.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Parceroo.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Parseroo.Repo, {:shared, self()})
     end
 
     :ok

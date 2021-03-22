@@ -1,7 +1,7 @@
-defmodule Parceroo.Factory do
-  use ExMachina.Ecto, repo: Parceroo.Repo
+defmodule Parseroo.Factory do
+  use ExMachina.Ecto, repo: Parseroo.Repo
 
-  alias Parceroo.Orders.{Address, Buyer, Item, Order, Payment, Shipment}
+  alias Parseroo.Orders.{Address, Buyer, Item, Order, Payment, Shipment}
 
   def buyer_factory do
     %Buyer{

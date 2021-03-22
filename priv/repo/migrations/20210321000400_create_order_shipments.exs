@@ -1,4 +1,4 @@
-defmodule Parceroo.Repo.Migrations.CreateOrderShipments do
+defmodule Parseroo.Repo.Migrations.CreateOrderShipments do
   use Ecto.Migration
   import EctoEnumMigration
 

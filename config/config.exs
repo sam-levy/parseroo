@@ -7,20 +7,20 @@
 # General application configuration
 use Mix.Config
 
-config :parceroo,
-  ecto_repos: [Parceroo.Repo]
+config :parseroo,
+  ecto_repos: [Parseroo.Repo]
 
-config :parceroo, Parceroo.Repo,
+config :parseroo, Parseroo.Repo,
   migration_primary_key: [type: :binary_id],
   migration_foreign_key: [type: :binary_id],
   migration_timestamps: [type: :utc_datetime_usec]
 
 # Configures the endpoint
-config :parceroo, ParcerooWeb.Endpoint,
+config :parseroo, ParserooWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "sAdm1+MYNUe45HZcQmqF+I1tC76x2u/diZgYuOQxkEywgKshC8Q4w+f69FStJV9f",
-  render_errors: [view: ParcerooWeb.ErrorView, accepts: ~w(json), layout: false],
-  pubsub_server: Parceroo.PubSub,
+  render_errors: [view: ParserooWeb.ErrorView, accepts: ~w(json), layout: false],
+  pubsub_server: Parseroo.PubSub,
   live_view: [signing_salt: "g13mC1+j"]
 
 # Configures Elixir's Logger

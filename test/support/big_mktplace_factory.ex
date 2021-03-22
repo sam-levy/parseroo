@@ -1,4 +1,4 @@
-defmodule Parceroo.BigMktPlaceFactory do
+defmodule Parseroo.BigMktPlaceFactory do
   def payload do
     %{
       "buyer" => %{
