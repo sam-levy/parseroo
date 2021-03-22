@@ -3,7 +3,7 @@ defmodule Parseroo.Orders.Order do
   import Ecto.Changeset
 
   alias Money.Ecto.Amount.Type, as: MoneyType
-  alias Parseroo.Orders.Buyer
+  alias Parseroo.Orders.{Buyer, Item, Payment, Shipment}
 
   defenum(OrderStatusType, :order_status_type, [:payment_pending, :paid, :in_transit, :delivered])
 
@@ -36,6 +36,11 @@ defmodule Parseroo.Orders.Order do
     field :expiration_date, :utc_datetime
 
     belongs_to :buyer, Buyer
+
+    has_many :items, Item
+    has_many :payments, Payment
+
+    has_one :shipment, Shipment
 
     timestamps()
   end

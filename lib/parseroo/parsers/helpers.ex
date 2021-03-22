@@ -6,6 +6,13 @@ defmodule Parseroo.Parsers.Helpers do
     end
   end
 
+  def money_to_float(%Money{} = money) do
+    with string_value <- Money.to_string(money),
+         float_value <- String.to_float(string_value) do
+      float_value
+    end
+  end
+
   def to_utc_datetime(value) do
     with {:ok, utc_datetime, _} <- DateTime.from_iso8601(value),
          datetime <- DateTime.truncate(utc_datetime, :second) do

@@ -40,6 +40,7 @@ defmodule Parseroo.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:casex, "~> 0.4.1"},
       {:phoenix, "~> 1.5.7"},
       {:phoenix_ecto, "~> 4.1"},
       {:ecto_enum, "~> 1.4"},
@@ -51,6 +52,7 @@ defmodule Parseroo.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:money, "~> 1.4"},
+      {:tesla, "~> 1.4.0"},
       {:ex_machina, "~> 2.7.0", only: :test},
       {:excoveralls, "~> 0.10", only: :test},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
