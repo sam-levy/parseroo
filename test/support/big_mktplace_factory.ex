@@ -1,12 +1,13 @@
 defmodule Parseroo.BigMktPlaceFactory do
-  alias Parseroo.Parsers.Params.{Order, OrderParams}
+  alias Parseroo.Parsers.Params.OrderParams
 
-  alias Parseroo.Parsers.Params.Order.{
+  alias Parseroo.Parsers.Params.Orders.{
     Address,
     Buyer,
     Item,
     Payment,
-    Shipment
+    Shipment,
+    Order
   }
 
   def payload do

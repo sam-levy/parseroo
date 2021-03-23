@@ -1,7 +1,7 @@
 defmodule Parseroo.Parsers.BigMktplace.ParseOrderItems do
   import Parseroo.Parsers.Helpers, only: [to_money_cents: 1]
 
-  alias Parseroo.Parsers.Params.Order.Item
+  alias Parseroo.Parsers.Params.Orders.Item
 
   def call(%{order_items: items}) do
     Enum.map(items, &build_item/1)

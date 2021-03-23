@@ -1,7 +1,7 @@
 defmodule Parseroo.Parsers.BigMktplace.ParseOrder do
   import Parseroo.Parsers.Helpers
 
-  alias Parseroo.Parsers.Params.Order
+  alias Parseroo.Parsers.Params.Orders.Order
 
   def call(payload) do
     %Order{

@@ -1,5 +1,5 @@
 defmodule Parseroo.Parsers.BigMktplace.ParseOrderBuyer do
-  alias Parseroo.Parsers.Params.Order.Buyer
+  alias Parseroo.Parsers.Params.Orders.Buyer
 
   def call(%{buyer: buyer}) do
     %Buyer{

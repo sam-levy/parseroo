@@ -2,7 +2,7 @@ defmodule Parseroo.Parsers.BigMktplace.ParseOrderBuyerTest do
   use Parseroo.DataCase, async: true
 
   alias Parseroo.BigMktPlaceFactory
-  alias Parseroo.Parsers.{BigMktplace.ParseOrderBuyer, Params.Order.Buyer}
+  alias Parseroo.Parsers.{BigMktplace.ParseOrderBuyer, Params.Orders.Buyer}
 
   describe "call/1" do
     test "parses an order buyer" do

@@ -3,14 +3,15 @@ defmodule Parseroo.Parsers.BigMktplaceTest do
 
   alias Parseroo.BigMktPlaceFactory
   alias Parseroo.Parsers.BigMktplace
-  alias Parseroo.Parsers.Params.{Order, OrderParams}
+  alias Parseroo.Parsers.Params.OrderParams
 
-  alias Parseroo.Parsers.Params.Order.{
+  alias Parseroo.Parsers.Params.Orders.{
     Address,
     Buyer,
     Item,
     Payment,
-    Shipment
+    Shipment,
+    Order
   }
 
   describe "parse/1" do

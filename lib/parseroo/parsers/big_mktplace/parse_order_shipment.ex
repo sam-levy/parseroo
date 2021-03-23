@@ -1,7 +1,7 @@
 defmodule Parseroo.Parsers.BigMktplace.ParseOrderShipment do
   import Parseroo.Parsers.Helpers, only: [to_utc_datetime: 1]
 
-  alias Parseroo.Parsers.Params.Order.Shipment
+  alias Parseroo.Parsers.Params.Orders.Shipment
 
   def call(%{shipping: shipping}) do
     %Shipment{

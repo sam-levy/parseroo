@@ -1,7 +1,7 @@
 defmodule Parseroo.Parsers.BigMktplace.ParseOrderPayments do
   import Parseroo.Parsers.Helpers
 
-  alias Parseroo.Parsers.Params.Order.Payment
+  alias Parseroo.Parsers.Params.Orders.Payment
 
   def call(%{payments: payments}) do
     Enum.map(payments, &build_payment/1)

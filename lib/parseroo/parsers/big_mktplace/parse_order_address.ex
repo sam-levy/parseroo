@@ -1,6 +1,6 @@
 defmodule Parseroo.Parsers.BigMktplace.ParseOrderAddress do
   alias Parseroo.Geo
-  alias Parseroo.Parsers.Params.Order.Address
+  alias Parseroo.Parsers.Params.Orders.Address
 
   def call(%{shipping: %{receiver_address: address}}) do
     %Address{
