@@ -52,11 +52,13 @@ defmodule Parseroo.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:money, "~> 1.4"},
+      {:oban, "~> 2.5"},
       {:tesla, "~> 1.4.0"},
       {:ex_machina, "~> 2.7.0", only: :test},
       {:excoveralls, "~> 0.10", only: :test},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
-      {:faker, "~> 0.16", only: :test}
+      {:faker, "~> 0.16", only: :test},
+      {:mox, "~> 1.0", only: :test}
     ]
   end
 

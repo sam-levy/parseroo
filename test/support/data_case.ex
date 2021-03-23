@@ -18,6 +18,8 @@ defmodule Parseroo.DataCase do
 
   using do
     quote do
+      use Oban.Testing, repo: Parseroo.Repo
+
       alias Parseroo.Repo
 
       import Ecto

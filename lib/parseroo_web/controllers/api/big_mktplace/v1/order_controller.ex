@@ -3,23 +3,17 @@ defmodule ParserooWeb.API.BigMktplace.V1.OrderController do
 
   alias Parseroo.Orders
   alias Parseroo.Parsers.BigMktplace
-  alias Parseroo.RecruitmentApp
+  alias Parseroo.RecruitmentApp.PostOrderWorker
 
-  # def create(conn, params) do
-  #   with {:ok, order} <- params |> BigMktplace.parse() |> Orders.persist(),
-  #        {:ok, order} <- Orders.fetch(order.id),
-  #        {:ok, _} <- RecruitmentApp.post_order(order) do
-  #     conn
-  #     |> put_status(:created)
-  #     |> json(%{status: "created"})
-  #   end
-  # end
+  alias ParserooWeb.OrderParams
 
   def create(conn, params) do
-    with {:ok, order} <- params |> BigMktplace.parse() |> Orders.persist() do
+    with {:ok, order_params} <- OrderParams.cast(params),
+         {:ok, order} <- order_params |> BigMktplace.parse() |> Orders.persist(),
+         {:ok, _job} <- %{"order_id" => order.id} |> PostOrderWorker.new() |> Oban.insert() do
       conn
       |> put_status(:created)
-      |> json(%{orderId: order.id})
+      |> json(%{status: "created"})
     end
   end
 end

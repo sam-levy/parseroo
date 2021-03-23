@@ -20,3 +20,10 @@ config :parseroo, ParserooWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+config :parseroo, Oban,
+  crontab: false,
+  queues: false,
+  plugins: false
+
+config :parseroo, Parseroo.RecruitmentApp, adapter: Parseroo.RecruitmentAppMock

@@ -37,6 +37,15 @@ config :money,
   symbol_on_right: false,
   symbol_space: false
 
+config :parseroo, Oban,
+  repo: Parseroo.Repo,
+  plugins: [Oban.Plugins.Pruner],
+  queues: [http_requests: 10]
+
+config :parseroo, Parseroo.RecruitmentApp, adapter: Parseroo.RecruitmentApp.HTTPAdapter
+
+config :tesla, adapter: Tesla.Adapter.Hackney
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

@@ -31,7 +31,8 @@ defmodule Parseroo.Repo.Migrations.CreateStateTypeEnum do
       :SC,
       :SE,
       :SP,
-      :TO
+      :TO,
+      :EX
     ])
   end
 end

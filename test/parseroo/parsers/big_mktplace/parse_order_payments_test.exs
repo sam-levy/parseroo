@@ -6,7 +6,7 @@ defmodule Parseroo.Parsers.BigMktplace.ParseOrderPaymentsTest do
 
   describe "call/1" do
     test "parses order payments" do
-      payload = BigMktPlaceFactory.payload()
+      payload = BigMktPlaceFactory.casted_payload()
 
       assert ParseOrderPayments.call(payload) == [
                %Payment{

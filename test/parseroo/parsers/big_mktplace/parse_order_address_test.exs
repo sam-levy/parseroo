@@ -6,7 +6,7 @@ defmodule Parseroo.Parsers.BigMktplace.ParseOrderAddressTest do
 
   describe "call/1" do
     test "parses an order address" do
-      payload = BigMktPlaceFactory.payload()
+      payload = BigMktPlaceFactory.casted_payload()
 
       assert ParseOrderAddress.call(payload) == %Address{
                address_line: "Rua Fake de Testes 3454",

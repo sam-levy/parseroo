@@ -6,7 +6,7 @@ defmodule Parseroo.Parsers.BigMktplace.ParseOrderShipmentTest do
 
   describe "call/1" do
     test "parses an order shipment" do
-      payload = BigMktPlaceFactory.payload()
+      payload = BigMktPlaceFactory.casted_payload()
 
       assert ParseOrderShipment.call(payload) == %Shipment{
                date_created: ~U[2019-06-24 20:45:33Z],

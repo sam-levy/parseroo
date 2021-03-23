@@ -1,24 +1,33 @@
 defmodule Parseroo.RecruitmentApp.HTTPAdapterTest do
-  use ExUnit.Case, async: true
+  use Parseroo.DataCase, async: true
 
   import Tesla.Mock
 
   alias Parseroo.Orders.Order
   alias Parseroo.RecruitmentApp.{HTTPAdapter, LocalAdapter}
 
-  # TODO:
   describe "post_order/1" do
-    # test "posts an order" do
-    #   {:ok, body} = LocalAdapter.post_order(%Order{})
+    #   test "posts an order" do
+    #     buyer = insert(:buyer)
+    #     order = insert(:order, buyer: buyer)
+    #     address = insert(:address)
 
-    #   mock(fn
-    #     %{method: :post, url: url} ->
-    #       assert url == "https://delivery-center-recruitment-ap.herokuapp.com/"
+    #     insert(:item, order: order)
+    #     insert(:payment, order: order)
+    #     insert(:shipment, order: order, receiver_address: address)
 
-    #       %Tesla.Env{status: 200, body: body}
-    #   end)
+    #     order = Repo.preload(order, [:items, :payments, :buyer, shipment: [:receiver_address]])
 
-    #   assert HTTPAdapter.post_order(%Order{}) == {:ok, body}
-    # end
+    #     {:ok, body} = LocalAdapter.post_order(%Order{})
+
+    #     mock(fn
+    #       %{method: :post, url: url} ->
+    #         assert url == "https://delivery-center-recruitment-ap.herokuapp.com/orders"
+
+    #         %Tesla.Env{status: 200, body: body}
+    #     end)
+
+    #     assert HTTPAdapter.post_order(order) == {:ok, body}
+    #   end
   end
 end

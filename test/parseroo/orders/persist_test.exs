@@ -1,9 +1,9 @@
 defmodule Parseroo.Orders.PersisTest do
   use Parseroo.DataCase, async: true
 
+  alias Parseroo.BigMktPlaceFactory
   alias Parseroo.Orders
   alias Parseroo.Orders.Order
-  alias Parseroo.BigMktPlaceFactory
 
   describe "call/1" do
     test "persists all schemas from order params" do

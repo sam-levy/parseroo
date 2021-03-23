@@ -6,7 +6,7 @@ defmodule Parseroo.Parsers.BigMktplace.ParseOrderBuyerTest do
 
   describe "call/1" do
     test "parses an order buyer" do
-      payload = BigMktPlaceFactory.payload()
+      payload = BigMktPlaceFactory.casted_payload()
 
       assert ParseOrderBuyer.call(payload) == %Buyer{
                doc_number: "09487965477",

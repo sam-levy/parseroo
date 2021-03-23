@@ -15,7 +15,7 @@ defmodule Parseroo.Parsers.BigMktplaceTest do
 
   describe "parse/1" do
     test "parses an order" do
-      payload = BigMktPlaceFactory.payload()
+      payload = BigMktPlaceFactory.casted_payload()
 
       assert BigMktplace.parse(payload) == %OrderParams{
                address: %Address{

@@ -20,6 +20,8 @@ defmodule ParserooWeb.ConnCase do
   using do
     quote do
       # Import conveniences for testing with connections
+      use Oban.Testing, repo: Parseroo.Repo
+
       import Plug.Conn
       import Phoenix.ConnTest
       import ParserooWeb.ConnCase

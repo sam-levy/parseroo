@@ -1,6 +1,6 @@
 defmodule Parseroo.Orders.Fetch do
-  alias Parseroo.Repo
   alias Parseroo.Orders.Order
+  alias Parseroo.Repo
 
   def call(id) do
     Order
