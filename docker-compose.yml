@@ -1,0 +1,25 @@
+version: '3.2'
+
+services:
+  db:
+    image: postgres:12.5-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432
+  parceroo:
+    environment:
+      POSTGRES_URL: postgres://postgres:postgres@db:5432/parceroo_dev
+      POSTGRES_TEST_URL: postgres://postgres:postgres@db:5432/parceroo_test
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    command: /app/start_dev.sh

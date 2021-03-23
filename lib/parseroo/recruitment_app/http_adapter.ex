@@ -26,6 +26,7 @@ defmodule Parseroo.RecruitmentApp.HTTPAdapter do
   defp handle_response({:ok, %Env{status: 400}}), do: {:error, :bad_request}
   defp handle_response({:ok, %Env{status: 403}}), do: {:error, :access_denied}
   defp handle_response({:ok, unexpected_response}), do: {:error, unexpected_response}
+  defp handle_response(err), do: err
 
   defp client do
     middlewares = [
