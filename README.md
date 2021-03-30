@@ -24,21 +24,6 @@ Then, you should execute the `mix ecto.setup` command to create the application 
 **Note:** the test database will be created when you first run the `mix test` command.
 
 :warning: Don't run `mix ecto.setup` with `MIX_ENV=test`. Since the task inserts data into the database, it won't be clean when the tests run, generating failures.
-
-#### Seeds
-
-You can seed some data by running `mix run priv/repo/seeds.exs`.
-
-This will add the following scenarios in the database:
-- Married couple with both on the contract
-- Married couple with only one of them on the contract
-- Single person alone on the contract
-- Single person with third parties on the contract
-
-This allows testing on the application frontend more easily.
-
-:warning: Be aware that before adding anything to the database, the seeds will delete all records from it. So, if you added some records to your database that you don't want to delete, you should not run the seeds. You can also modify the seeds before running it, but do not commit your changes.
-
 ### Application
 
 To start your Phoenix server:
