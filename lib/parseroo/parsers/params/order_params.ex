@@ -8,7 +8,10 @@ defmodule Parseroo.Parsers.Params.OrderParams do
     Payment
   }
 
-  defstruct [:order, :buyer, :shipment, :address, :items, :payments]
+  @fields [:order, :buyer, :shipment, :address, :items, :payments]
+
+  @enforce_keys @fields
+  defstruct @fields
 
   @type t() :: %__MODULE__{
           order: Order.t(),

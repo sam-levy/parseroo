@@ -1,4 +1,25 @@
 defmodule Parseroo.Parsers.Params.Orders.Order do
+  @required_fields [
+    :external_id,
+    :store_id,
+    :date_created,
+    :date_closed,
+    :last_updated,
+    :total_amount,
+    :total_shipping,
+    :total_amount_with_shipping,
+    :paid_amount,
+    :expiration_date,
+    :status
+  ]
+
+  @optional_fields [:buyer_id]
+
+  @fields @required_fields ++ @optional_fields
+
+  @enforce_keys @required_fields
+  defstruct @fields
+
   @type t() :: %__MODULE__{
           external_id: String.t(),
           store_id: integer(),
@@ -13,19 +34,4 @@ defmodule Parseroo.Parsers.Params.Orders.Order do
           status: String.t(),
           buyer_id: nil | String.t()
         }
-
-  defstruct [
-    :external_id,
-    :store_id,
-    :date_created,
-    :date_closed,
-    :last_updated,
-    :total_amount,
-    :total_shipping,
-    :total_amount_with_shipping,
-    :paid_amount,
-    :expiration_date,
-    :status,
-    :buyer_id
-  ]
 end

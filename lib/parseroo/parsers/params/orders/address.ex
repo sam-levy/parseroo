@@ -1,5 +1,5 @@
 defmodule Parseroo.Parsers.Params.Orders.Address do
-  defstruct [
+  @fields [
     :external_id,
     :address_line,
     :street_name,
@@ -14,6 +14,9 @@ defmodule Parseroo.Parsers.Params.Orders.Address do
     :receiver_phone,
     :state
   ]
+
+  @enforce_keys @fields
+  defstruct @fields
 
   @type t() :: %__MODULE__{
           external_id: String.t(),

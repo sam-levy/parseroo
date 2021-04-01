@@ -1,5 +1,5 @@
 defmodule Parseroo.Parsers.Params.Orders.Buyer do
-  defstruct [
+  @fields [
     :external_id,
     :email,
     :phone_number,
@@ -9,6 +9,9 @@ defmodule Parseroo.Parsers.Params.Orders.Buyer do
     :doc_number,
     :nickname
   ]
+
+  @enforce_keys @fields
+  defstruct @fields
 
   @type t() :: %__MODULE__{
           external_id: String.t(),

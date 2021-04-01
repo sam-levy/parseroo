@@ -1,5 +1,5 @@
 defmodule Parseroo.Parsers.Params.Orders.Payment do
-  defstruct [
+  @required_fields [
     :external_id,
     :order_external_id,
     :payer_external_id,
@@ -12,9 +12,15 @@ defmodule Parseroo.Parsers.Params.Orders.Payment do
     :installment_amount,
     :total_paid_amount,
     :payment_type,
-    :status,
-    :order_id
+    :status
   ]
+
+  @optional_fields [:order_id]
+
+  @fields @required_fields ++ @optional_fields
+
+  @enforce_keys @required_fields
+  defstruct @fields
 
   @type t() :: %__MODULE__{
           external_id: String.t(),

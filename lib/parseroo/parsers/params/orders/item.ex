@@ -1,5 +1,11 @@
 defmodule Parseroo.Parsers.Params.Orders.Item do
-  defstruct [:external_id, :title, :quantity, :unit_price, :full_unit_price, :order_id]
+  @required_fields [:external_id, :title, :quantity, :unit_price, :full_unit_price]
+  @optional_fields [:order_id]
+
+  @fields @required_fields ++ @optional_fields
+
+  @enforce_keys @required_fields
+  defstruct @fields
 
   @type t() :: %__MODULE__{
           external_id: String.t(),
